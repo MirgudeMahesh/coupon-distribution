@@ -11,6 +11,8 @@ const FamilyListPage = () => {
   const members = [
     { id: 'f1', name: 'Priya Sharma', relation: 'Spouse', status: 'assigned', date: 'Claimed on 12 Apr' },
     { id: 'f2', name: 'Arjun Sharma', relation: 'Child 1', status: 'unused', date: 'Join link active' },
+    { id: 'f3', name: 'Sunil Sharma', relation: 'Father', status: 'assigned', date: 'Claimed on 18 Apr' },
+    { id: 'f4', name: 'Kiran Sharma', relation: 'Mother', status: 'used', date: 'Used on 15 Apr' },
   ];
 
   const getStatusBadge = (status) => {

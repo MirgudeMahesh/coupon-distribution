@@ -36,6 +36,8 @@ const COUPONS = [
 const FAMILY_MEMBERS = [
   { id: 'f1', name: 'Priya Sharma', relation: 'Spouse', couponStatus: 'assigned' },
   { id: 'f2', name: 'Arjun Sharma', relation: 'Child 1', couponStatus: 'unused' },
+  { id: 'f3', name: 'Sunil Sharma', relation: 'Father', couponStatus: 'assigned' },
+  { id: 'f4', name: 'Kiran Sharma', relation: 'Mother', couponStatus: 'used' },
 ];
 
 /* Coupon status badge helper */

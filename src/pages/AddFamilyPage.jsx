@@ -4,7 +4,7 @@ import './AddFamilyPage.css';
 
 /**
  * AddFamilyPage — Form to add a family member.
- * Restricts to Spouse, Child 1, and Child 2 (one each).
+ * Restricts to Spouse, Child 1, Child 2, Father, and Mother (one each).
  */
 const AddFamilyPage = () => {
   const navigate = useNavigate();
@@ -38,10 +38,10 @@ const AddFamilyPage = () => {
     const e = {};
     if (!form.name.trim())         e.name = 'Name is required';
     
-    // Spouse: Phone is mandatory. Child 1 & 2: Optional.
-    if (form.relationship === 'spouse') {
+    // Spouse, Father, Mother: Phone is mandatory. Child 1 & 2: Optional.
+    if (['spouse', 'father', 'mother'].includes(form.relationship)) {
       if (!form.phone.trim()) {
-        e.phone = 'Phone number is required for Spouse';
+        e.phone = `Phone number is required for ${form.relationship.charAt(0).toUpperCase() + form.relationship.slice(1)}`;
       }
     }
     
@@ -56,7 +56,7 @@ const AddFamilyPage = () => {
     
     // If relationship changes, clear phone error if it was optional for the new relationship
     if (name === 'relationship') {
-      if (value !== 'spouse') {
+      if (!['spouse', 'father', 'mother'].includes(value)) {
         setErrors((prev) => ({ ...prev, phone: '' }));
       }
     }
@@ -79,6 +79,8 @@ const AddFamilyPage = () => {
     { value: 'spouse', label: 'Spouse' },
     { value: 'child1', label: 'Child 1' },
     { value: 'child2', label: 'Child 2' },
+    { value: 'father', label: 'Father' },
+    { value: 'mother', label: 'Mother' },
   ].filter(opt => !addedRelationships.includes(opt.value));
 
   /* ── Success Screen ── */
@@ -149,7 +151,7 @@ const AddFamilyPage = () => {
           </div>
           <div>
             <h1 className="af-title">Add Family Member</h1>
-            <p className="af-subtitle">One Spouse and up to 2 children can be added</p>
+            <p className="af-subtitle">Spouse, up to 2 children, Father and Mother can be added</p>
           </div>
         </div>
 
@@ -229,14 +231,16 @@ const AddFamilyPage = () => {
                 {/* Phone */}
                 <div className="form-group">
                   <label className="form-label" htmlFor="af-phone">
-                    Phone {form.relationship === 'spouse' ? '*' : '(Optional)'}
+                    Phone {['spouse', 'father', 'mother'].includes(form.relationship) ? '*' : '(Optional)'}
                   </label>
                   <input
                     id="af-phone"
                     name="phone"
                     type="tel"
                     className={`form-input ${errors.phone ? 'form-input--error' : ''}`}
-                    placeholder={form.relationship === 'spouse' ? "Spouse's phone number" : "Phone number (optional)"}
+                    placeholder={['spouse', 'father', 'mother'].includes(form.relationship) 
+                      ? `${form.relationship.charAt(0).toUpperCase() + form.relationship.slice(1)}'s phone number` 
+                      : "Phone number (optional)"}
                     value={form.phone}
                     onChange={handleChange}
                   />
@@ -259,7 +263,7 @@ const AddFamilyPage = () => {
             <div className="af-limit-reached">
               <div className="af-limit-icon">ℹ️</div>
               <p className="af-limit-text">
-                You have already added all available family slots (Spouse, Child 1, and Child 2).
+                You have already added all available family slots (Spouse, Child 1, Child 2, Father, and Mother).
               </p>
               <button className="btn-primary" onClick={() => navigate('/dashboard')}>
                 Back to Dashboard
