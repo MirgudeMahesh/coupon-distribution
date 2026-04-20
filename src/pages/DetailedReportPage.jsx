@@ -5,20 +5,22 @@ import './DetailedReportPage.css';
 /**
  * DetailedReportPage — Shows health insights and nutrition tips.
  */
+/* Mock data for the detailed report */
+const REPORT_DATA = {
+  patient: { initials: 'R.K.', age: 32, gender: 'Male' },
+  height: { feet: 5, inches: 11 },
+  weight: 78,
+  bmi: '24.2',
+  comorbidityText: 'None reported',
+  total: '3',
+  risk: 'Low'
+};
+
+/**
+ * DetailedReportPage — Shows health assessment report.
+ */
 const DetailedReportPage = () => {
   const navigate = useNavigate();
-
-  const insights = [
-    { title: 'Vitamin D', level: 'Deficient', detail: 'Your levels are below 20 ng/mL. Consider 20 mins of morning sun exposure.' },
-    { title: 'Hydration', level: 'Optimal', detail: 'You are drinking ~2.5L daily. Keep it up!' },
-    { title: 'Fiber Intake', level: 'Low', detail: 'Include more leafy greens and whole grains in your lunch.' }
-  ];
-
-  const tips = [
-    'Add 1 tsp of Flaxseeds to your breakfast for Omega-3.',
-    'Replace evening chai with Green Tea.',
-    'Include Curd/Yogurt in lunch for gut health.'
-  ];
 
   return (
     <div className="dr-root">
@@ -31,39 +33,84 @@ const DetailedReportPage = () => {
           Back
         </button>
 
-        <header className="dr-header">
-          <h1 className="dr-title">Your Health Report</h1>
-          <p className="dr-subtitle">Based on your recent lifestyle questionnaire</p>
-        </header>
+        <div className="dr-report-card">
+          <header className="dr-report-header">
+            <h1 className="dr-report-title">Vitamin D Assessment Report</h1>
+            <div className="dr-divider" />
+          </header>
 
-        <section className="dr-section">
-          <h2 className="dr-section-title">Key Insights</h2>
-          <div className="dr-insight-list">
-            {insights.map((item, index) => (
-              <div key={index} className="dr-insight-card">
-                <div className="dr-insight-top">
-                  <span className="dr-insight-label">{item.title}</span>
-                  <span className={`badge ${item.level === 'Deficient' || item.level === 'Low' ? 'badge-danger' : 'badge-success'}`}>
-                    {item.level}
-                  </span>
+          <div className="dr-report-content">
+            {/* Demographics */}
+            <div className="dr-info-grid">
+              <div className="dr-info-item">
+                <span className="dr-label">Patient</span>
+                <span className="dr-value">{REPORT_DATA.patient.initials}</span>
+              </div>
+              <div className="dr-info-item">
+                <span className="dr-label">Age</span>
+                <span className="dr-value">{REPORT_DATA.patient.age}</span>
+              </div>
+              <div className="dr-info-item">
+                <span className="dr-label">Gender</span>
+                <span className="dr-value">{REPORT_DATA.patient.gender}</span>
+              </div>
+            </div>
+
+            {/* Vitals */}
+            <div className="dr-stats-row">
+              <div className="dr-stat">
+                <span className="dr-label">Height</span>
+                <span className="dr-value">{REPORT_DATA.height.feet}'{REPORT_DATA.height.inches}"</span>
+              </div>
+              <div className="dr-stat">
+                <span className="dr-label">Weight</span>
+                <span className="dr-value">{REPORT_DATA.weight}kg</span>
+              </div>
+              <div className="dr-stat">
+                <span className="dr-label">BMI</span>
+                <span className="dr-value">{REPORT_DATA.bmi}</span>
+              </div>
+            </div>
+
+            <div className="dr-divider" />
+
+            {/* Clinical */}
+            <div className="dr-clinical-section">
+              <div className="dr-info-group">
+                <span className="dr-label">Comorbidities</span>
+                <p className="dr-value-block">{REPORT_DATA.comorbidityText}</p>
+              </div>
+
+              <div className="dr-score-row">
+                <div className="dr-info-item">
+                  <span className="dr-label">Total Score</span>
+                  <span className="dr-value dr-highlight">{REPORT_DATA.total}</span>
                 </div>
-                <p className="dr-insight-detail">{item.detail}</p>
+                <div className="dr-info-item">
+                  <span className="dr-label">Risk Level</span>
+                  <span className="dr-value dr-highlight">{REPORT_DATA.risk} Risk</span>
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
 
-        <section className="dr-section">
-          <h2 className="dr-section-title">Personalized Nutrition Tips</h2>
-          <div className="dr-tips-card">
-            {tips.map((tip, index) => (
-              <div key={index} className="dr-tip-item">
-                <div className="dr-tip-dot" />
-                <p className="dr-tip-text">{tip}</p>
+            {/* Adequacy Guide */}
+            <div className="dr-guide-box">
+              <p className="dr-guide-title">ADEQUACY GUIDE</p>
+              <div className="dr-guide-grid">
+                <span>&lt; 5</span> <span>→</span> <span>Adequate</span>
+                <span>&ge; 5</span> <span>→</span> <span>Inadequate</span>
               </div>
-            ))}
+            </div>
+
+            {/* Disclaimer */}
+            <div className="dr-disclaimer">
+              <p>
+                This is a screening test and not a substitute for a diagnostic test. 
+                Please consult your doctor for interpretation and appropriate treatment.
+              </p>
+            </div>
           </div>
-        </section>
+        </div>
 
         <footer className="dr-footer">
           <button className="btn-primary" onClick={() => navigate('/coupon')} id="report-use-coupon-btn">

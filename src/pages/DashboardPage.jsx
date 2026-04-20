@@ -100,29 +100,26 @@ const DashboardPage = () => {
         <section className="db-section">
           <h2 className="db-section-title">Health Snapshot</h2>
           <div className="db-summary-card">
-            <div className="db-summary-group">
-              <p><strong>BMI:</strong> {HEALTH_SUMMARY.bmi}</p>
-            </div>
             
-            <div className="db-summary-group">
-              <p><strong>Comorbidities:</strong></p>
-              <p className="db-summary-value">{HEALTH_SUMMARY.comorbidityText}</p>
-            </div>
-
-            <div className="db-summary-row">
-              <div>
-                <p><strong>Total Score:</strong> {HEALTH_SUMMARY.total}</p>
+            <div className="db-summary-row" style={{ borderTop: 'none', paddingTop: 0 }}>
+              <div className="db-summary-group">
+                <span className="db-summary-label">Total Score</span>
+                <p className="db-summary-value">{HEALTH_SUMMARY.total}</p>
               </div>
-              <div>
-                <p><strong>Risk Level:</strong> {HEALTH_SUMMARY.risk}</p>
+              <div className="db-summary-group">
+                <span className="db-summary-label">Risk Level</span>
+                <div className="db-risk-wrap">
+                  <div className="db-risk-dot" />
+                  <p className="db-summary-value">{HEALTH_SUMMARY.risk} Risk</p>
+                </div>
               </div>
             </div>
 
             <div className="db-adequacy-box">
-              <p className="db-adequacy-title">ADEQUACY GUIDE:</p>
+              <p className="db-adequacy-title">ADEQUACY GUIDE</p>
               <div className="db-adequacy-grid">
-                <span>&lt; 5</span> <span>→</span> <span>Adequate</span>
-                <span>≥ 5</span> <span>→</span> <span>Inadequate</span>
+                <span className="db-adequacy-val">&lt; 5</span> <span className="db-adequacy-arrow">→</span> <span className="db-adequacy-label">Adequate</span>
+                <span className="db-adequacy-val">≥ 5</span> <span className="db-adequacy-arrow">→</span> <span className="db-adequacy-label">Inadequate</span>
               </div>
             </div>
 
