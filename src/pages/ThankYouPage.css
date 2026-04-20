@@ -1,0 +1,204 @@
+/* ===========================
+   ThankYouPage Styles
+   =========================== */
+.ty-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #ecfdf5 0%, #f8fafc 50%, #eff6ff 100%);
+  padding: 32px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background orbs */
+.ty-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ty-orb--top {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+  top: -80px;
+  left: -80px;
+}
+.ty-orb--bottom {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
+  bottom: -60px;
+  right: -60px;
+}
+
+.ty-container {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icon */
+.ty-icon-wrap {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ty-icon-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.ty-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  animation: checkBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  z-index: 1;
+}
+
+/* Text */
+.ty-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.ty-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: -8px;
+}
+
+/* WhatsApp card */
+.ty-whatsapp-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  text-align: left;
+}
+
+.ty-wa-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0fdf4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ty-wa-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ty-wa-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ty-wa-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Description */
+.ty-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* Steps */
+.ty-steps {
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.ty-steps-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ty-step-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ty-step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.ty-step-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CTA Button */
+.ty-btn {
+  margin-top: 4px;
+}
+
+/* Footer note */
+.ty-footer-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: -4px;
+}

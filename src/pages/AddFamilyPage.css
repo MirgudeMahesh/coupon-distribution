@@ -1,0 +1,195 @@
+/* ===========================
+   AddFamilyPage Styles
+   =========================== */
+.af-root {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32px 16px 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.af-container {
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Page title block */
+.af-page-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.af-title-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(16,185,129,0.35);
+}
+
+.af-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.af-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Form card */
+.af-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.af-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+
+.af-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Side-by-side row */
+.af-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* Error state */
+.form-input--error {
+  border-color: var(--danger) !important;
+  background: var(--danger-light) !important;
+}
+
+.af-error {
+  font-size: 12px;
+  color: var(--danger);
+  font-weight: 500;
+  margin-top: -2px;
+}
+
+.af-submit-btn {
+  margin-top: 4px;
+}
+
+/* ── Success Screen ── */
+.af-success {
+  max-width: 440px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  padding-top: 60px;
+}
+
+.af-success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+  animation: checkBounce 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+.af-success-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.af-success-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.af-coupon-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  background: var(--primary-lighter);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.af-coupon-notice-icon { font-size: 26px; flex-shrink: 0; }
+
+.af-coupon-notice-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.af-coupon-notice-desc {
+  font-size: 13px;
+  color: var(--primary-dark);
+  opacity: 0.8;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.af-success-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.af-add-another {
+  width: 100%;
+}
+
+/* Limit reached state */
+.af-limit-reached {
+  text-align: center;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.af-limit-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.af-limit-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}

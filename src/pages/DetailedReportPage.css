@@ -1,0 +1,113 @@
+/* ===========================
+   DetailedReportPage Styles
+   =========================== */
+.dr-root {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32px 0 48px;
+}
+
+.dr-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dr-header {
+  text-align: left;
+}
+
+.dr-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.dr-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.dr-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dr-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dr-insight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dr-insight-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.dr-insight-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.dr-insight-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dr-insight-detail {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.dr-tips-card {
+  background: var(--primary-lighter);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dr-tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dr-tip-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+.dr-tip-text {
+  font-size: 14px;
+  color: var(--primary-dark);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.dr-footer {
+  margin-top: 12px;
+}

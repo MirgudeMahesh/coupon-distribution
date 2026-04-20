@@ -1,0 +1,91 @@
+/* ===========================
+   FamilyListPage Styles
+   =========================== */
+.fl-root {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 32px 0 48px;
+}
+
+.fl-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fl-header {
+  text-align: left;
+}
+
+.fl-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.fl-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.fl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fl-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.fl-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.fl-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fl-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.fl-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fl-rel {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.fl-add-btn {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

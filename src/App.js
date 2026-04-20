@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+/* Pages */
+import ThankYouPage from './pages/ThankYouPage';
+import DashboardPage from './pages/DashboardPage';
+import AddFamilyPage from './pages/AddFamilyPage';
+import CouponPage from './pages/CouponPage';
+import DetailedReportPage from './pages/DetailedReportPage';
+import FamilyListPage from './pages/FamilyListPage';
+
+/* Global Styles */
+import './index.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Landing Page is Thank You Page */}
+        <Route path="/" element={<ThankYouPage />} />
+        
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<DashboardPage />} />
+        
+        {/* Add Family Member */}
+        <Route path="/add-family" element={<AddFamilyPage />} />
+        
+        {/* Coupon Screen */}
+        <Route path="/coupon" element={<CouponPage />} />
+        
+        {/* Detailed Report */}
+        <Route path="/report" element={<DetailedReportPage />} />
+        
+        {/* Family List */}
+        <Route path="/family-list" element={<FamilyListPage />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
