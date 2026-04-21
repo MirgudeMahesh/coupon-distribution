@@ -33,12 +33,7 @@ const COUPONS = [
   },
 ];
 
-const FAMILY_MEMBERS = [
-  { id: 'f1', name: 'Priya Sharma', relation: 'Spouse', couponStatus: 'assigned' },
-  { id: 'f2', name: 'Arjun Sharma', relation: 'Child 1', couponStatus: 'unused' },
-  { id: 'f3', name: 'Sunil Sharma', relation: 'Father', couponStatus: 'assigned' },
-  { id: 'f4', name: 'Kiran Sharma', relation: 'Mother', couponStatus: 'used' },
-];
+// Dynamic state managed via hooks in the component
 
 /* Coupon status badge helper */
 const couponStatusBadge = (status) => {
@@ -67,6 +62,24 @@ const HEALTH_SUMMARY = {
  */
 const DashboardPage = () => {
   const navigate = useNavigate();
+  const [familyMembers, setFamilyMembers] = React.useState([]);
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('nutrihealth_added_family_details');
+    if (saved) {
+      setFamilyMembers(JSON.parse(saved));
+    } else {
+      // Seed with some initial data for visual appeal if desired, 
+      // but matching relationships in AddFamilyPage
+      const initial = [
+        { id: 'f1', name: 'Priya Sharma', relation: 'Spouse', couponStatus: 'assigned', relKey: 'spouse' },
+        { id: 'f2', name: 'Arjun Sharma', relation: 'Child 1', couponStatus: 'unused', relKey: 'child1' },
+      ];
+      setFamilyMembers(initial);
+      localStorage.setItem('nutrihealth_added_family_details', JSON.stringify(initial));
+      localStorage.setItem('nutrihealth_added_family', JSON.stringify(['spouse', 'child1']));
+    }
+  }, []);
 
   return (
     <div className="db-root">
@@ -186,18 +199,22 @@ const DashboardPage = () => {
           </div>
 
           <div className="db-family-list">
-            {FAMILY_MEMBERS.map((m) => (
-              <div key={m.id} className="db-family-item">
-                <div className="db-family-avatar">
-                  {m.name.charAt(0)}
+            {familyMembers.length > 0 ? (
+              familyMembers.map((m) => (
+                <div key={m.id} className="db-family-item">
+                  <div className="db-family-avatar">
+                    {m.name.charAt(0)}
+                  </div>
+                  <div className="db-family-info">
+                    <p className="db-family-name">{m.name}</p>
+                    <p className="db-family-relation">{m.relation}</p>
+                  </div>
+                  {couponStatusBadge(m.couponStatus)}
                 </div>
-                <div className="db-family-info">
-                  <p className="db-family-name">{m.name}</p>
-                  <p className="db-family-relation">{m.relation}</p>
-                </div>
-                {couponStatusBadge(m.couponStatus)}
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="db-empty-text">No family members added yet.</p>
+            )}
           </div>
         </section>
 
@@ -237,7 +254,7 @@ const DashboardPage = () => {
               <span>Family List</span>
             </button>
 
-            <button
+            {/* <button
               className="db-quick-card"
               onClick={() => navigate('/questionnaire')}
               id="questionnaire-btn"
@@ -252,7 +269,7 @@ const DashboardPage = () => {
                 </svg>
               </div>
               <span>Questionnaire</span>
-            </button>
+            </button> */}
           </div>
         </section>
 

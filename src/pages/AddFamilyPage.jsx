@@ -17,10 +17,9 @@ const AddFamilyPage = () => {
     if (saved) {
       setAddedRelationships(JSON.parse(saved));
     } else {
-      // Default members from mock dashboard
-      const defaults = ['spouse', 'child1'];
-      setAddedRelationships(defaults);
-      localStorage.setItem('nutrihealth_added_family', JSON.stringify(defaults));
+      // Start with empty list if no one added yet
+      setAddedRelationships([]);
+      localStorage.setItem('nutrihealth_added_family', JSON.stringify([]));
     }
   }, []);
 
@@ -67,10 +66,23 @@ const AddFamilyPage = () => {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
 
-    // Save to "persistence"
-    const updated = [...addedRelationships, form.relationship];
-    setAddedRelationships(updated);
-    localStorage.setItem('nutrihealth_added_family', JSON.stringify(updated));
+    // Save to relationships list for dropdown filtering
+    const updatedRels = [...addedRelationships, form.relationship];
+    setAddedRelationships(updatedRels);
+    localStorage.setItem('nutrihealth_added_family', JSON.stringify(updatedRels));
+    
+    // Save to details list for Dashboard/FamilyList
+    const savedDetails = localStorage.getItem('nutrihealth_added_family_details');
+    const details = savedDetails ? JSON.parse(savedDetails) : [];
+    const newMember = {
+      id: `f${Date.now()}`,
+      name: form.name,
+      relation: availableOptions.find(o => o.value === form.relationship)?.label || form.relationship,
+      couponStatus: 'assigned',
+      relKey: form.relationship,
+      date: `Added on ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}`
+    };
+    localStorage.setItem('nutrihealth_added_family_details', JSON.stringify([...details, newMember]));
     
     setSubmitted(true);
   };

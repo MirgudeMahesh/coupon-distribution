@@ -7,13 +7,14 @@ import './FamilyListPage.css';
  */
 const FamilyListPage = () => {
   const navigate = useNavigate();
+  const [members, setMembers] = React.useState([]);
 
-  const members = [
-    { id: 'f1', name: 'Priya Sharma', relation: 'Spouse', status: 'assigned', date: 'Claimed on 12 Apr' },
-    { id: 'f2', name: 'Arjun Sharma', relation: 'Child 1', status: 'unused', date: 'Join link active' },
-    { id: 'f3', name: 'Sunil Sharma', relation: 'Father', status: 'assigned', date: 'Claimed on 18 Apr' },
-    { id: 'f4', name: 'Kiran Sharma', relation: 'Mother', status: 'used', date: 'Used on 15 Apr' },
-  ];
+  React.useEffect(() => {
+    const saved = localStorage.getItem('nutrihealth_added_family_details');
+    if (saved) {
+      setMembers(JSON.parse(saved));
+    }
+  }, []);
 
   const getStatusBadge = (status) => {
     switch (status) {
@@ -49,7 +50,7 @@ const FamilyListPage = () => {
                   <p className="fl-rel">{m.relation} • {m.date}</p>
                 </div>
               </div>
-              {getStatusBadge(m.status)}
+              {getStatusBadge(m.couponStatus)}
             </div>
           ))}
         </div>
