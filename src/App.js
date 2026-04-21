@@ -8,6 +8,7 @@ import AddFamilyPage from './pages/AddFamilyPage';
 import CouponPage from './pages/CouponPage';
 import DetailedReportPage from './pages/DetailedReportPage';
 import FamilyListPage from './pages/FamilyListPage';
+import StandaloneQuestionnaire from './pages/StandaloneQuestionnaire';
 
 /* Global Styles */
 import './index.css';
@@ -33,6 +34,9 @@ function App() {
         
         {/* Family List */}
         <Route path="/family-list" element={<FamilyListPage />} />
+
+        {/* Vitamin D Questionnaire */}
+        <Route path="/questionnaire" element={<StandaloneQuestionnaire />} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
