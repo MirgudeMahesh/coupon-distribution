@@ -114,7 +114,8 @@ export const generateAssessmentReport = (patientData) => {
 --------------------------
  Vitamin D Assessment
 --------------------------
-Patient: ${patientData.initials}
+Patient: ${patientData.name}
+Phone: ${patientData.phone}
 Age: ${patientData.age}   Gender: ${patientData.gender}
 Height: ${patientData.height_feet}'${patientData.height_inches}"
 Weight: ${patientData.weight_kg}kg

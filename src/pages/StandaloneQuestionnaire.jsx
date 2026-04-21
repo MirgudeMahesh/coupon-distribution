@@ -13,7 +13,9 @@ const StandaloneQuestionnaire = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [formData, setFormData] = useState({
-    initials: "",
+    name: "",
+    country_code: "+91",
+    phone_number: "",
     age: "",
     gender: "",
     height_feet: "",
@@ -46,7 +48,8 @@ const StandaloneQuestionnaire = () => {
   const handleCalculateScore = () => {
     // 1. Validate mandatory fields in Section A
     const mandatoryA = [
-      { key: "initials", label: "Initials" },
+      { key: "name", label: "Patient Name" },
+      { key: "phone_number", label: "Phone Number" },
       { key: "age", label: "Age" },
       { key: "gender", label: "Gender" },
       { key: "height_feet", label: "Height" },
@@ -104,7 +107,8 @@ const StandaloneQuestionnaire = () => {
     if (formData.other_comorbidity) comorbidities.push(`• ${formData.other_comorbidity}`);
 
     const assessmentReport = generateAssessmentReport({
-      initials: formData.initials,
+      name: formData.name,
+      phone: `${formData.country_code} ${formData.phone_number}`,
       age,
       gender: formData.gender,
       height_feet: heightFeet,
@@ -124,7 +128,9 @@ const StandaloneQuestionnaire = () => {
 
   const handleReset = () => {
     setFormData({
-      initials: "",
+      name: "",
+      country_code: "+91",
+      phone_number: "",
       age: "",
       gender: "",
       height_feet: "",
@@ -185,6 +191,40 @@ const StandaloneQuestionnaire = () => {
     .has-error input, .has-error select { border-color: #ef4444 !important; background-color: #fef2f2 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important; }
     .error-msg { color: #ef4444; font-size: 11px; font-weight: 600; margin-top: 4px; display: block; }
     .has-error label { color: #ef4444 !important; }
+
+    /* Phone Input Style */
+    .phone-input-group {
+      display: flex;
+      gap: 0;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+    .phone-input-group:focus-within {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      background: white;
+    }
+    .country-select {
+      width: 90px !important;
+      border: none !important;
+      border-right: 1px solid #e2e8f0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding-right: 25px !important;
+    }
+    .phone-input {
+      border: none !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      flex: 1;
+    }
+    .has-error .phone-input-group {
+      border-color: #ef4444 !important;
+      background-color: #fef2f2 !important;
+    }
 
     /* Modal Styles */
     .modal-overlay {
@@ -272,18 +312,50 @@ const StandaloneQuestionnaire = () => {
         {/* Section A */}
         <div className="section">
           <h2 className="section-title">👤 {translations.sectionA}</h2>
-          <div className={`form-group ${errorField === 'initials' ? 'has-error' : ''}`} id="group-initials">
-            <label>{translations.patientInitials} *</label>
-            <input 
-              type="text" 
-              placeholder="e.g. A.K." 
-              value={formData.initials} 
-              onChange={(e) => {
-                setFormData({ ...formData, initials: e.target.value });
-                if (errorField === 'initials') setErrorField(null);
-              }} 
-            />
-            {errorField === 'initials' && <span className="error-msg">This field is required</span>}
+          
+          <div className="grid-2">
+            <div className={`form-group ${errorField === 'name' ? 'has-error' : ''}`} id="group-name">
+              <label>Patient Name *</label>
+              <input 
+                type="text" 
+                placeholder="" 
+                value={formData.name} 
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                  if (errorField === 'name') setErrorField(null);
+                }} 
+              />
+              {errorField === 'name' && <span className="error-msg">This field is required</span>}
+            </div>
+
+            <div className={`form-group ${errorField === 'phone_number' ? 'has-error' : ''}`} id="group-phone_number">
+              <label>Phone Number *</label>
+              <div className="phone-input-group">
+                <select 
+                  className="country-select"
+                  value={formData.country_code}
+                  onChange={(e) => setFormData({ ...formData, country_code: e.target.value })}
+                >
+                  <option value="+91">+91 (IN)</option>
+                  <option value="+1">+1 (US)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+971">+971 (UAE)</option>
+                  <option value="+65">+65 (SG)</option>
+                </select>
+                <input 
+                  type="text"
+                  className="phone-input"
+                  placeholder="Enter number"
+                  value={formData.phone_number}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    setFormData({ ...formData, phone_number: val });
+                    if (errorField === 'phone_number') setErrorField(null);
+                  }}
+                />
+              </div>
+              {errorField === 'phone_number' && <span className="error-msg">This field is required</span>}
+            </div>
           </div>
           
           <div className="grid-2">
