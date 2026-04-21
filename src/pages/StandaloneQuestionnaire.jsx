@@ -411,7 +411,7 @@ const StandaloneQuestionnaire = () => {
 
         <div className="button-group">
           <button className="btn-reset" onClick={handleReset}>Reset Form</button>
-          <button className="btn-calculate" onClick={handleCalculateScore}>📊 Calculate Score & Log Report</button>
+          <button className="btn-calculate" onClick={handleCalculateScore}>Submit</button>
         </div>
       </div>
 
