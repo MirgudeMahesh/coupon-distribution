@@ -297,6 +297,18 @@ const StandaloneQuestionnaire = () => {
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .info-text {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 6px;
+      line-height: 1.4;
+      display: block;
+    }
+    .submit-footer-info {
+      text-align: center;
+      margin-top: 16px;
+    }
   `;
 
   return (
@@ -354,6 +366,9 @@ const StandaloneQuestionnaire = () => {
                   }}
                 />
               </div>
+              <p className="info-text">
+                Please provide the whatsapp number, as your test results will be sent only to that number.
+              </p>
               {errorField === 'phone_number' && <span className="error-msg">This field is required</span>}
             </div>
           </div>

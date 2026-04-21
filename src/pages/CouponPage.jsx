@@ -77,9 +77,9 @@ const CouponPage = () => {
               <p className="cp-desc">{couponData.description}</p>
             </div>
 
-            <button 
-              className="btn-primary cp-redeem-btn" 
-              onClick={() => window.open('https://www.1mg.com', '_blank')}
+            <button
+              className="btn-primary cp-redeem-btn"
+              onClick={() => window.open('https://www.1mg.com/otc/deksel-oral-nano-liquid-60000-iu-5ml-each-sugar-free-otc634337', '_blank')}
             >
               Redeem on 1mg
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
