@@ -45,7 +45,7 @@ const StandaloneQuestionnaire = () => {
     q18: "",
   });
 
-  const handleCalculateScore = () => {
+  const handleCalculateScore = async () => {
     // 1. Validate mandatory fields in Section A
     const mandatoryA = [
       { key: "name", label: "Patient Name" },
@@ -160,6 +160,24 @@ const StandaloneQuestionnaire = () => {
 
     console.log("%c ASSESSMENT REPORT GENERATED ", "background: #10b981; color: #fff; font-weight: bold; padding: 4px;");
     console.log(assessmentReport);
+
+    // Call API to send final message
+    try {
+      const fullPhone = `${formData.country_code}${formData.phone_number}`.replace('+', '');
+      console.log(fullPhone);
+      fetch("http://localhost:3000/send-final-message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ to: fullPhone, name: formData.name }),
+      })
+      .then(res => res.json())
+      .then(data => console.log("Final message API response:", data))
+      .catch(err => console.error("Error calling final message API:", err));
+    } catch (err) {
+      console.error("API call setup error:", err);
+    }
     
     setShowModal(true);
   };
