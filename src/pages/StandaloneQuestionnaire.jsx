@@ -65,7 +65,45 @@ const StandaloneQuestionnaire = () => {
       }
     }
 
-    // 2. Validate questionnaire questions (q3 - q18)
+    
+    // 3. Specific Validation Constraints
+    if (formData.phone_number.length !== 10) {
+      alert("Enter valid phone number");
+      setErrorField("phone_number");
+      const el = document.getElementById("group-phone_number");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (Number(formData.age) >= 120) {
+      alert("Enter valid age");
+      setErrorField("age");
+      const el = document.getElementById("group-age");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (Number(formData.height_feet) >= 7) {
+      alert("Enter valid height");
+      setErrorField("height_feet");
+      const el = document.getElementById("group-height_feet");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (Number(formData.height_inches) >= 13) {
+      alert("Inches should be upto 12");
+      setErrorField("height_inches");
+      const el = document.getElementById("group-height_inches");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (Number(formData.weight_kg) >= 200) {
+      alert("Enter valid weight");
+      setErrorField("weight_kg");
+      const el = document.getElementById("group-weight_kg");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    
+    // 4. Validate questionnaire questions (q3 - q18)
     const questionsToValidate = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
     for (const num of questionsToValidate) {
       const qKey = `q${num}`;
@@ -416,9 +454,17 @@ const StandaloneQuestionnaire = () => {
               />
               {errorField === 'height_feet' && <span className="error-msg">Required</span>}
             </div>
-            <div className="form-group">
+            <div className={`form-group ${errorField === 'height_inches' ? 'has-error' : ''}`} id="group-height_inches">
               <label>{translations.heightInches} ({translations.inches}) *</label>
-              <input type="number" value={formData.height_inches} onChange={(e) => setFormData({ ...formData, height_inches: e.target.value })} />
+              <input 
+                type="number" 
+                value={formData.height_inches} 
+                onChange={(e) => {
+                  setFormData({ ...formData, height_inches: e.target.value });
+                  if (errorField === 'height_inches') setErrorField(null);
+                }} 
+              />
+              {errorField === 'height_inches' && <span className="error-msg">Required</span>}
             </div>
             <div className={`form-group ${errorField === 'weight_kg' ? 'has-error' : ''}`} id="group-weight_kg">
               <label>{translations.weightKg} (kg) *</label>
