@@ -170,7 +170,7 @@ const StandaloneQuestionnaire = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ to: fullPhone, name: formData.name }),
+        body: JSON.stringify({ to: fullPhone, name: formData.name, score: totalScore,riskLevel: riskLevel}),
       })
       .then(res => res.json())
       .then(data => console.log("Final message API response:", data))
