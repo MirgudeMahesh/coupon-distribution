@@ -64,11 +64,17 @@ const D3CampaignData = () => {
             <tbody>
               {data.map((row, index) => (
                 <tr key={index}>
-                  {Object.values(row).map((value, i) => (
-                    <td key={i}>
-                      {value !== null ? value.toString() : "NULL"}
-                    </td>
-                  ))}
+                 {Object.entries(row).map(([key, value], i) => (
+  <td key={i}>
+    {value !== null
+      ? key === "created_at"
+        ? new Date(value).toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+          })
+        : value.toString()
+      : "NULL"}
+  </td>
+))}
                 </tr>
               ))}
             </tbody>
