@@ -18,13 +18,13 @@ function App() {
     <Router>
       <Routes>
         {/* Landing Page is Thank You Page */}
-        <Route path="/" element={<ThankYouPage />} />
+        // <Route path="/" element={<ThankYouPage />} />
         
         {/* Dashboard */}
-        <Route path="/dashboard" element={<DashboardPage />} />
+        // <Route path="/dashboard" element={<DashboardPage />} />
         
         {/* Add Family Member */}
-        <Route path="/add-family" element={<AddFamilyPage />} />
+        // <Route path="/add-family" element={<AddFamilyPage />} />
         
         {/* Coupon Screen */}
         <Route path="/coupon" element={<CouponPage />} />
