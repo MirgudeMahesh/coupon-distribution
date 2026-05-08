@@ -27,7 +27,7 @@ function App() {
     
         
         {/* Coupon Screen */}
-        <Route path="/coupon" element={<CouponPage />} />
+        
         
         {/* Detailed Report */}
         <Route path="/report" element={<DetailedReportPage />} />
