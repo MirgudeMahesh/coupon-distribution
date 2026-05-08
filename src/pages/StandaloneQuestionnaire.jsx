@@ -165,7 +165,7 @@ const StandaloneQuestionnaire = () => {
     try {
       const fullPhone = `${formData.country_code}${formData.phone_number}`.replace('+', '');
       console.log(fullPhone);
-      fetch("http://localhost:3000/send-final-message", {
+      fetch("https://backend-d3-repo.onrender.com/send-final-message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
