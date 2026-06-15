@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx";
 
 const D3CampaignData = () => {
   const [data, setData] = useState([]);
@@ -46,6 +47,54 @@ const D3CampaignData = () => {
           );
         });
 
+  const handleExportExcel = () => {
+    if (filteredData.length === 0) return;
+
+    // Format data for export: convert created_at to readable IST string
+    const exportRows = filteredData.map((row) => {
+      const formatted = {};
+      Object.entries(row).forEach(([key, value]) => {
+        if (value === null) {
+          formatted[key] = "NULL";
+        } else if (key === "created_at") {
+          formatted[key] = new Date(value).toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+          });
+        } else {
+          formatted[key] = value;
+        }
+      });
+      return formatted;
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(exportRows);
+
+    // Auto-size columns based on content
+    const colWidths = Object.keys(exportRows[0]).map((key) => {
+      const maxLen = Math.max(
+        key.length,
+        ...exportRows.map((row) =>
+          row[key] !== undefined && row[key] !== null
+            ? row[key].toString().length
+            : 0
+        )
+      );
+      return { wch: Math.min(maxLen + 2, 50) };
+    });
+    worksheet["!cols"] = colWidths;
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "d3-camp-patients-data");
+
+    // Generate filename with date context
+    const suffix = selectedDate
+      ? `_${selectedDate.replace(/\//g, "-")}`
+      : "_all-dates";
+    const fileName = `d3-camp-patients-data${suffix}.xlsx`;
+
+    XLSX.writeFile(workbook, fileName);
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -86,6 +135,31 @@ const D3CampaignData = () => {
         <span className="record-count">
           {filteredData.length} record{filteredData.length !== 1 ? "s" : ""} found
         </span>
+
+        <button
+          className="export-btn"
+          onClick={handleExportExcel}
+          disabled={filteredData.length === 0}
+          title="Download as Excel"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ marginRight: "6px", verticalAlign: "middle" }}
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Export to Excel
+        </button>
       </div>
 
       {filteredData.length === 0 ? (
@@ -155,6 +229,7 @@ const styles = `
     align-items: center;
     gap: 12px;
     margin-bottom: 18px;
+    flex-wrap: wrap;
   }
 
   .filter-bar label {
@@ -185,6 +260,30 @@ const styles = `
     background-color: #007bff;
     padding: 5px 12px;
     border-radius: 20px;
+  }
+
+  .export-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #1d6f42;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+    margin-left: auto;
+  }
+
+  .export-btn:hover:not(:disabled) {
+    background-color: #155230;
+  }
+
+  .export-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .table-wrapper {
